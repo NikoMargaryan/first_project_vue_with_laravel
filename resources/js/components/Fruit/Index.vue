@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import api from "../../api";
+
 export default {
     name: "Index",
     data(){
@@ -32,12 +34,11 @@ export default {
     },
     methods: {
         getFruits(){
-            axios.get('/api/fruits')
-            .then(res => {
-                this.fruits= res.data.data
-                // console.log(res);
-            })
-        }
+            api.get('api/fruits')
+                .then(res => {
+                        this.fruits= res.data.data
+                })
+        },
     }
 }
 </script>

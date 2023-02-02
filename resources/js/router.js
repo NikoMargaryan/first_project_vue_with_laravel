@@ -17,6 +17,11 @@ export default new createRouter({
             path: '/users/registration',
             component: () => import('./components/User/Registration.vue'),
             name: 'users.registration'
+        },
+        {
+            path: '/users/personal',
+            component: () => import('./components/User/Personal.vue'),
+            name: 'users.personal'
         }
     ]
 })

@@ -24,15 +24,19 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('register', 'register');
     Route::post('logout', 'logout');
     Route::post('refresh', 'refresh');
+
+    Route::group(['middleware' => 'jwt.auth'], function (){
+        Route::group(['namespaces' => 'Fruit','prefix' => 'fruits'],function () {
+            Route::get('/',[\App\Http\Controllers\Fruit\IndexController::class,'fruit']);
+        });
+    });
+
+
 });
 
 Route::group(['namespaces' => 'User','prefix' => 'users'],function () {
     Route::post('/',[\App\Http\Controllers\User\StoreController::class,'store']);
 });
 
-
-Route::group(['namespaces' => 'Fruit','prefix' => 'fruits'],function () {
-    Route::get('/',[\App\Http\Controllers\Fruit\IndexController::class,'fruit']);
-});
 
 
