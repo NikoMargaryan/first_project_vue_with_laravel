@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-export default new createRouter({
+
+
+const route= new createRouter({
     history: createWebHistory(),
 
     routes: [
@@ -22,6 +24,35 @@ export default new createRouter({
             path: '/users/personal',
             component: () => import('./components/User/Personal.vue'),
             name: 'users.personal'
+        },
+        {
+            path: '/:pathMatch(.*)*',
+            component: () => import('./components/User/Personal.vue'),
+            name: '404'
         }
     ]
 })
+
+route.beforeEach((to,from,next) => {
+    const authorisationToken = localStorage.getItem('authorisation_token')
+
+    if(!authorisationToken){
+        if(to.name === 'users.login' || to.name === 'users.registration'){
+            return next()
+        }else{
+            return next({
+                name: 'users.login'
+            })
+        }
+    }
+
+    if(to.name === 'users.login' || to.name === 'users.registration' &&  authorisationToken ) {
+        return next({
+            name: 'users.personal'
+        })
+    }
+
+    next();
+})
+
+export default route

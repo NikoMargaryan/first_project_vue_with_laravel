@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 Auth::routes();
 
-Route::get('{page}', 'App\Http\Controllers\IndexController')->where('page', '.*');
+Route::get('{page}', 'App\Http\Controllers\IndexController@index')->where('page', '.*');

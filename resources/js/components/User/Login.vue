@@ -12,7 +12,7 @@ export default {
     data(){
         return {
             email: null,
-            password: null
+            password: null,
         }
     },
     methods: {
@@ -21,7 +21,7 @@ export default {
                 email: this.email,
                 password: this.password
             }).then(res => {
-                localStorage.setItem('authorisation_token',res.data.authorisation.token)
+                localStorage.setItem('authorisation_token', res.data.authorisation.token)
                 this.$router.push({  name: 'users.personal' })
                 // const data={
                 //     name: 'Abraham',

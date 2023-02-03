@@ -20,7 +20,7 @@ export default {
         }
     },
     mounted() {
-        console.log(localStorage.getItem('authorisation_token'));
+        // console.log(localStorage.getItem('authorisation_token'));
     },
     methods: {
         store(){
@@ -30,7 +30,8 @@ export default {
                 password: this.password,
                 password_confirmation: this.password_confirmation,
             }).then(res => {
-                console.log(res);
+                localStorage.setItem('authorisation_token', res.data.authorisation_token)
+                this.$router.push({ name:'users.personal' })
             })
         }
     }
