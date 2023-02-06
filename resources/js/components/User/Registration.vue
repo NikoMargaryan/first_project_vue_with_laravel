@@ -2,6 +2,7 @@
     <div class="w-25">
         <input v-model="name" type="text" class="form-control mt-3 mb-3" placeholder="name">
         <input v-model="email" type="email" class="form-control mb-3" placeholder="email">
+        <div v-if="error" class="text-danger mb-3">{{error}}</div>
         <input v-model="password" type="password" class="form-control mb-3" placeholder="password">
         <input v-model="password_confirmation" type="password" class="form-control mb-3" placeholder="confirm password">
         <button @click="store" type="button" class="btn btn-primary">Send</button>
@@ -16,7 +17,8 @@ export default {
             name: null,
             email: null,
             password: null,
-            password_confirmation: null
+            password_confirmation: null,
+            error: null,
         }
     },
     mounted() {
@@ -32,6 +34,9 @@ export default {
             }).then(res => {
                 localStorage.setItem('authorisation_token', res.data.authorisation_token)
                 this.$router.push({ name:'users.personal' })
+            })
+            .catch(error => {
+                this.error= error.response.data.message
             })
         }
     }

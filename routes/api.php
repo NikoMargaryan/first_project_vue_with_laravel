@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Fruit\IndexController;
+use App\Http\Controllers\User\StoreController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -27,15 +30,16 @@ Route::controller(AuthController::class)->group(function () {
 
     Route::group(['middleware' => 'jwt.auth'], function (){
         Route::group(['namespaces' => 'Fruit','prefix' => 'fruits'],function () {
-            Route::get('/',[\App\Http\Controllers\Fruit\IndexController::class,'fruit']);
+            Route::get('/',[IndexController::class,'fruit']);
         });
-    });
 
+    });
 
 });
 
 Route::group(['namespaces' => 'User','prefix' => 'users'],function () {
-    Route::post('/',[\App\Http\Controllers\User\StoreController::class,'store']);
+    Route::post('/',[StoreController::class,'store']);
+    Route::get('/',[UserController::class,'user_list']);
 });
 
 

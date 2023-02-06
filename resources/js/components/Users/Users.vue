@@ -5,14 +5,14 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Price</th>
+                <th scope="col">Email</th>
             </tr>
             </thead>
             <tbody>
-            <tr v-for="fruit in fruits">
-                <th scope="row">{{fruit.id}}</th>
-                <td>{{fruit.name}}</td>
-                <td>{{fruit.price}}</td>
+            <tr v-for="user in users">
+                <th scope="row">{{user.id}}</th>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
             </tr>
             </tbody>
         </table>
@@ -23,20 +23,20 @@
 import api from "../../api";
 
 export default {
-    name: "Index",
+    name: "Users",
     data(){
         return {
-            fruits: null,
+            users: null,
         }
     },
     mounted() {
-      this.getFruits()
+        this.getUsers()
     },
     methods: {
-        getFruits(){
-            api.get('api/fruits')
+        getUsers(){
+            api.get('api/users')
                 .then(res => {
-                        this.fruits= res.data.data
+                    this.users= res.data.data
                 })
         },
     }

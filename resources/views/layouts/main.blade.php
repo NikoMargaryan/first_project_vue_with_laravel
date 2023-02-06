@@ -10,7 +10,7 @@
 
     <title>JWT SPA</title>
 </head>
-<body class="p-5">
+<body>
 <div id="app">
 
 </div>

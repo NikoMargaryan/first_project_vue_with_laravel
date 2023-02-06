@@ -2,13 +2,24 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 
 const route= new createRouter({
+
     history: createWebHistory(),
 
     routes: [
+        // {
+        //     path: '/',
+        //     component: () => import('./components/'),
+        //     name: 'home'
+        // },
         {
             path: '/fruits',
             component: () => import('./components/Fruit/Index.vue'),
             name: 'fruit.index'
+        },
+        {
+            path: '/users',
+            component: () => import('./components/Users/Users.vue'),
+            name: 'users'
         },
         {
             path: '/users/login',
@@ -21,13 +32,13 @@ const route= new createRouter({
             name: 'users.registration'
         },
         {
-            path: '/users/personal',
-            component: () => import('./components/User/Personal.vue'),
-            name: 'users.personal'
+            path: '/users/home',
+            component: () => import('./components/User/Home.vue'),
+            name: 'users.home'
         },
         {
             path: '/:pathMatch(.*)*',
-            component: () => import('./components/User/Personal.vue'),
+            component: () => import('./components/User/Home.vue'),
             name: '404'
         }
     ]
@@ -48,7 +59,7 @@ route.beforeEach((to,from,next) => {
 
     if(to.name === 'users.login' || to.name === 'users.registration' &&  authorisationToken ) {
         return next({
-            name: 'users.personal'
+            name: 'users.home'
         })
     }
 
