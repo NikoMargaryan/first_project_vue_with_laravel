@@ -23,21 +23,25 @@
     </nav>
     <div class="r_l_1">
         <div class="r_l_1_s">
-            <router-link class="button-85" v-if="authorisationToken" :to="{name:'users.home'}">Lists</router-link>
+            <button class="button-85"  v-if="authorisationToken" @click="showList">Lists</button>
         </div>
-        <router-view></router-view>
+        <Home v-if="listAreVisible" v-model:listAreVisible="listAreVisible"></Home>
+        <router-view v-else/>
     </div>
 
 </template>
 
 <script>
+import Home from "./User/Home.vue";
 import api from "../api";
 
     export default {
        name: 'UserComponent',
+        components:{Home},
         data(){
            return {
-               authorisationToken: null
+               authorisationToken: null,
+               listAreVisible:false
            }
         },
         watch:{
@@ -55,13 +59,16 @@ import api from "../api";
            getAuthorisationToken(){
                this.authorisationToken = localStorage.getItem('authorisation_token')
            },
+            showList(){
+               this.listAreVisible=!this.listAreVisible
+            },
             logout(){
                api.post('/api/logout')
                 .then(res => {
                     localStorage.removeItem('authorisation_token');
                     this.$router.push({name: 'users.login'})
                 })
-            }
+            },
         },
         computed:{
            currentRoute(){
