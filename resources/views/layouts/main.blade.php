@@ -16,3 +16,11 @@
 </div>
 </body>
 </html>
+<style>
+html {
+        height: 100%;
+}
+body{
+        background: linear-gradient(45deg,#00dbde,#fc00ff);
+}
+</style>

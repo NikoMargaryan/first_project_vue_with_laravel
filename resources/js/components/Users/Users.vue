@@ -3,16 +3,16 @@
         <table class="table table-dark table-hover dark">
             <thead>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
+                <th scope="col" class="col_users">#</th>
+                <th scope="col" class="col_users">Name</th>
+                <th scope="col" class="col_users">Email</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="user in users">
-                <th scope="row">{{user.id}}</th>
-                <td>{{user.name}}</td>
-                <td>{{user.email}}</td>
+                <th scope="row" class="row_users">{{user.id}}</th>
+                <td class="row_users">{{user.name}}</td>
+                <td class="row_users">{{user.email}}</td>
             </tr>
             </tbody>
         </table>
@@ -50,5 +50,13 @@ div{
 }
 .dark{
     width: 80%;
+}
+.col_users{
+    font-size: 1vw;
+    padding: 0.52vw;
+}
+.row_users{
+    font-size: 0.8vw;
+    padding: 0.52vw;
 }
 </style>
