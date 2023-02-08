@@ -70,7 +70,7 @@ export default {
                 password_confirmation: this.password_confirmation,
             }).then(res => {
                 localStorage.setItem('authorisation_token', res.data.authorisation_token)
-                this.$router.push({ name:'users.personal' })
+                this.$router.push({ name:'users.home' })
             })
             .catch(error => {
                 this.error= error.response.data.message

@@ -54,7 +54,6 @@ import api from "../api";
             currentRoute:{
                 handler(value){
                     this.getAuthorisationToken()
-                    this.getUserName()
                 },
                 immediate:true
             }
@@ -80,7 +79,7 @@ import api from "../api";
             getUserName(){
                api.get('/api/users/name')
                 .then(res =>{
-                    this.user=res.data
+                    this.user= res.data
                 })
             }
         },
