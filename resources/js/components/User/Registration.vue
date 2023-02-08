@@ -31,6 +31,9 @@
                     >
                     <label>Password Confirmation</label>
                 </div>
+                <div v-if="error" class="text-danger mb-3">
+                    {{this.error}}
+                </div>
                 <a href="#" @click="store">
                     <span></span>
                     <span></span>

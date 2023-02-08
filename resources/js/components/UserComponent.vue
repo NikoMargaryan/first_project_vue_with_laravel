@@ -12,7 +12,12 @@
                         <router-link v-if="!authorisationToken" class="m-2" :to="{name:'users.registration'}">Registration</router-link>
                     </li>
                 </ul>
-
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <li class="nav-item person" v-if="authorisationToken">
+                        <span class="material-icons">person_outline</span>
+                        <h1  class="m-2 user" >{{user}}</h1>
+                    </li>
+                </ul>
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
                     <li class="nav-item">
                         <a v-if="authorisationToken" class="m-2" @click.prevent="logout" href="#">Logout</a>
@@ -41,19 +46,22 @@ import api from "../api";
         data(){
            return {
                authorisationToken: null,
-               listAreVisible:false
+               listAreVisible:false,
+               user: null,
            }
         },
         watch:{
             currentRoute:{
                 handler(value){
                     this.getAuthorisationToken()
+                    this.getUserName()
                 },
                 immediate:true
             }
         },
         mounted() {
             this.getAuthorisationToken()
+            this.getUserName()
         },
         methods: {
            getAuthorisationToken(){
@@ -69,12 +77,18 @@ import api from "../api";
                     this.$router.push({name: 'users.login'})
                 })
             },
+            getUserName(){
+               api.get('/api/users/name')
+                .then(res =>{
+                    this.user=res.data
+                })
+            }
         },
         computed:{
            currentRoute(){
                return this.$route?.name
            }
-        }
+        },
     }
 </script>
 
@@ -88,6 +102,7 @@ a{
 }
 .ul_log_reg{
     display: flex;
+    align-items: center;
 }
 .nav-item a{
     font-size: 1.95vw;
@@ -103,6 +118,19 @@ a{
 .r_l_1_s{
     display: flex;
     justify-content: center;
+}
+.user{
+    font-size: 1.95vw;
+    color: #7abaff;
+}
+.person{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.material-icons{
+    font-size: 2vw;
+    color: #F2F3F5;
 }
 .button-85 {
     padding: 0.6vw 2vw;

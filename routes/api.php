@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Fruit\IndexController;
+use App\Http\Controllers\User\GetUserController;
 use App\Http\Controllers\User\StoreController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Http\Request;
@@ -33,14 +34,17 @@ Route::controller(AuthController::class)->group(function () {
             Route::get('/',[IndexController::class,'fruit']);
         });
 
+        Route::group(['namespaces' => 'User','prefix' => 'users'],function () {
+            Route::post('/',[StoreController::class,'store']);
+            Route::get('/',[UserController::class,'user_list']);
+            Route::get('/name',[GetUserController::class,'user_name']);
+        });
+
     });
 
 });
 
-Route::group(['namespaces' => 'User','prefix' => 'users'],function () {
-    Route::post('/',[StoreController::class,'store']);
-    Route::get('/',[UserController::class,'user_list']);
-});
+
 
 
 
