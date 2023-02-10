@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Fruit\IndexController;
+use App\Http\Controllers\User\GetImageController;
 use App\Http\Controllers\User\GetUserController;
 use App\Http\Controllers\User\StoreController;
 use App\Http\Controllers\User\UserController;
@@ -30,20 +30,20 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('refresh', 'refresh');
 
     Route::group(['middleware' => 'jwt.auth'], function (){
-        Route::group(['namespaces' => 'Fruit','prefix' => 'fruits'],function () {
-            Route::get('/',[IndexController::class,'fruit']);
+
+        Route::group(['namespaces' => 'User','prefix' => 'users'],function () {
+            Route::get('/',[UserController::class,'user_list']);
+            Route::get('/name',[GetUserController::class,'userName']);
+            Route::get('/image',[GetImageController::class,'userImage']);
         });
 
     });
 
 });
+
 Route::group(['namespaces' => 'User','prefix' => 'users'],function () {
     Route::post('/',[StoreController::class,'store']);
-    Route::get('/',[UserController::class,'user_list']);
-    Route::get('/name',[GetUserController::class,'user_name']);
 });
-
-
 
 
 

@@ -1,6 +1,5 @@
 <template>
     <div class="main_home">
-        <router-link class="m-2 button-84" @click="$emit('update:listAreVisible',false)" :to="{name:'fruit.index'}">List of fruits</router-link>
         <router-link class="m-2 button-84" @click="$emit('update:listAreVisible',false)" :to="{name:'users'}">List of users</router-link>
     </div>
 </template>

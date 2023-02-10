@@ -70,6 +70,10 @@ export default {
 </script>
 
 <style lang="scss">
+
+.text-danger{
+    font-size: 1vw;
+}
 .title {
     text-align: center;
     text-transform: uppercase;

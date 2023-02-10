@@ -1,25 +1,32 @@
 <template>
     <nav class="navbar navbar-expand{-xsm|-sm|-md|-lg|-xl|-xxl} navbar-dark bg-dark mb-4">
         <div class="container-fluid">
-            <router-link to="/" class="navbar-brand a_1">Home</router-link>
-
+            <div class="home_main">
+                <router-link to="/" class="navbar-brand a_1">Home</router-link>
+            </div>
             <div class="ul_log_reg">
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
+                <ul class="navbar-nav me-auto mb-md-0">
+                    <li class="nav-item person">
                         <router-link v-if="!authorisationToken" :to="{name:'users.login'}">Login</router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item person">
                         <router-link v-if="!authorisationToken" class="m-2" :to="{name:'users.registration'}">Registration</router-link>
                     </li>
                 </ul>
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item person" v-if="authorisationToken">
-                        <span class="material-icons">person_outline</span>
-                        <h1  class="m-2 user" >{{user}}</h1>
+                <ul class="navbar-nav me-auto  mb-md-0">
+                    <li class="nav-item person" >
+                        <img class="avatar_img"
+                             :src="image"
+                             :class="{active: isActive}"
+                             alt="avatar"
+                             v-if="authorisationToken"
+                             @click="sizeChange"
+                        >
+                        <p  class="m-2 user" v-if="authorisationToken">{{name}}</p>
                     </li>
                 </ul>
-                <ul class="navbar-nav me-auto mb-2 mb-md-0">
-                    <li class="nav-item">
+                <ul class="navbar-nav me-auto mb-md-0">
+                    <li class="nav-item person">
                         <a v-if="authorisationToken" class="m-2" @click.prevent="logout" href="#">Logout</a>
                     </li>
                 </ul>
@@ -47,7 +54,9 @@ import api from "../api";
            return {
                authorisationToken: null,
                listAreVisible:false,
-               user: null,
+               name: null,
+               image: null,
+               isActive: false,
            }
         },
         watch:{
@@ -61,6 +70,7 @@ import api from "../api";
         mounted() {
             this.getAuthorisationToken()
             this.getUserName()
+            this.getUserImage()
         },
         methods: {
            getAuthorisationToken(){
@@ -79,8 +89,17 @@ import api from "../api";
             getUserName(){
                api.get('/api/users/name')
                 .then(res =>{
-                    this.user= res.data
+                    this.name= res.data
                 })
+            },
+            getUserImage(){
+               api.get('/api/users/image')
+                .then(res => {
+                    this.image=res.data
+                })
+            },
+            sizeChange(){
+               this.isActive = !this.isActive
             }
         },
         computed:{
@@ -108,6 +127,7 @@ a{
 }
 .navbar-nav{
     flex-direction: row;
+    padding-bottom: 0;
 }
 .r_l_1{
     display: flex;
@@ -126,6 +146,38 @@ a{
     display: flex;
     flex-direction: row;
     align-items: center;
+    position: relative;
+}
+.avatar_img{
+    width: 2vw;
+    height: 2vw;
+    left: -2vw;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    position: absolute;
+}
+.active{
+    position: absolute;
+    transition: all 0.3s ease;
+    top: 5vw;
+    right: 12vw;
+    width: 12vw;
+    height: 12vw;
+}
+.home_main{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.log_item_ul{
+    display: flex;
+    height: 24px;
+}
+.log_item_li{
+    height: 100%;
+}
+.log_item_a{
+    margin: auto auto !important;
 }
 .material-icons{
     font-size: 2vw;
@@ -205,5 +257,8 @@ a{
 .button-85:active{
     box-shadow:1px 1px 5px rgb(0,0,0,0.5);
 }
-
+@media screen and (max-width: 768px){
+    .material-icons{
+    }
+}
 </style>

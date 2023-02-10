@@ -6,16 +6,6 @@ const route= new createRouter({
     history: createWebHistory(),
 
     routes: [
-        // {
-        //     path: '/',
-        //     component: () => import('./components/'),
-        //     name: 'home'
-        // },
-        {
-            path: '/fruits',
-            component: () => import('./components/Fruit/Index.vue'),
-            name: 'fruit.index'
-        },
         {
             path: '/users',
             component: () => import('./components/Users/Users.vue'),

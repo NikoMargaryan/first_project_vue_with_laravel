@@ -8,8 +8,7 @@ use App\Http\Controllers\Controller;
 
 class GetUserController extends Controller
 {
-    public function user_name(){
+    public function userName(){
         return auth()->user()->name;
-
     }
 }

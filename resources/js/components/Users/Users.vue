@@ -6,6 +6,7 @@
                 <th scope="col" class="col_users">#</th>
                 <th scope="col" class="col_users">Name</th>
                 <th scope="col" class="col_users">Email</th>
+                <th scope="col" class="col_users">Image</th>
             </tr>
             </thead>
             <tbody>
@@ -13,6 +14,7 @@
                 <th scope="row" class="row_users">{{user.id}}</th>
                 <td class="row_users">{{user.name}}</td>
                 <td class="row_users">{{user.email}}</td>
+                <td class="row_users">{{user.image}}</td>
             </tr>
             </tbody>
         </table>

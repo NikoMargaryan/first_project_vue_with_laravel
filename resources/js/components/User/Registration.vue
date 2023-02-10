@@ -31,10 +31,20 @@
                     >
                     <label>Password Confirmation</label>
                 </div>
+                <div class="reg">
+                    <input type="file"
+                           @change="getImage"
+                           required=""
+                           id="upload"
+                           hidden
+                           class="file_input"
+                    >
+                    <label for="upload">Choose File</label>
+                </div>
                 <div v-if="error" class="text-danger mb-3">
                     {{this.error}}
                 </div>
-                <a href="#" @click="store">
+                <a href="#" @click.prevent="store">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -56,19 +66,21 @@ export default {
             password: null,
             password_confirmation: null,
             error: null,
+            image: null,
         }
     },
-    mounted() {
-        // console.log(localStorage.getItem('authorisation_token'));
-    },
     methods: {
+        getImage(e){
+            this.image=e.target.files[0]
+        },
         store(){
-            axios.post('/api/users', {
-                name: this.name,
-                email: this.email,
-                password: this.password,
-                password_confirmation: this.password_confirmation,
-            }).then(res => {
+            let data=new FormData
+            data.append('name',this.name)
+            data.append('email',this.email)
+            data.append('password',this.password)
+            data.append('password_confirmation',this.password_confirmation)
+            data.append('image',this.image)
+            axios.post('/api/users', data).then(res => {
                 localStorage.setItem('authorisation_token', res.data.authorisation_token)
                 this.$router.push({ name:'users.home' })
             })
@@ -81,7 +93,20 @@ export default {
 </script>
 
 <style lang="scss">
-
+.reg{
+    label {
+        background-color: indigo;
+        color: white;
+        padding: 0.5vw;
+        font-family: sans-serif;
+        border-radius: 0.3vw;
+        cursor: pointer;
+        margin-top: 1vw;
+    }
+}
+.text-danger{
+    font-size: 1vw;
+}
 .title_reg{
     text-align: center;
     text-transform: uppercase;
