@@ -1,19 +1,17 @@
 <template>
-    <nav class="navbar navbar-expand{-xsm|-sm|-md|-lg|-xl|-xxl} navbar-dark bg-dark mb-4">
+    <nav class="navbar navbar-expand{-xsm|-sm|-md|-lg|-xl|-xxl} navbar-dark bg-dark">
         <div class="container-fluid">
             <div class="home_main">
                 <router-link to="/" class="navbar-brand a_1">Home</router-link>
             </div>
             <div class="ul_log_reg">
-                <ul class="navbar-nav me-auto mb-md-0">
+                <ul class="navbar-nav ">
                     <li class="nav-item person">
                         <router-link v-if="!authorisationToken" :to="{name:'users.login'}">Login</router-link>
                     </li>
                     <li class="nav-item person">
-                        <router-link v-if="!authorisationToken" class="m-2" :to="{name:'users.registration'}">Registration</router-link>
+                        <router-link v-if="!authorisationToken" :to="{name:'users.registration'}">Registration</router-link>
                     </li>
-                </ul>
-                <ul class="navbar-nav me-auto  mb-md-0">
                     <li class="nav-item person" >
                         <img class="avatar_img"
                              :src="image"
@@ -22,12 +20,12 @@
                              v-if="authorisationToken"
                              @click="sizeChange"
                         >
-                        <p  class="m-2 user" v-if="authorisationToken">{{name}}</p>
                     </li>
-                </ul>
-                <ul class="navbar-nav me-auto mb-md-0">
                     <li class="nav-item person">
-                        <a v-if="authorisationToken" class="m-2" @click.prevent="logout" href="#">Logout</a>
+                        <p  class="user" v-if="authorisationToken">{{name}}</p>
+                    </li>
+                    <li class="nav-item person">
+                        <a v-if="authorisationToken"  @click.prevent="logout" href="#">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -62,6 +60,10 @@ import api from "../api";
         watch:{
             currentRoute:{
                 handler(value){
+                    if (value==='users.home'){
+                        this.getUserImage()
+                        this.getUserName()
+                    }
                     this.getAuthorisationToken()
                 },
                 immediate:true
@@ -69,8 +71,8 @@ import api from "../api";
         },
         mounted() {
             this.getAuthorisationToken()
-            this.getUserName()
             this.getUserImage()
+            this.getUserName()
         },
         methods: {
            getAuthorisationToken(){
@@ -113,6 +115,8 @@ import api from "../api";
 <style lang="scss">
 .a_1{
     font-size: 1.95vw;
+    height: 2.5vw;
+    padding: 0;
 }
 a{
     text-decoration: none;
@@ -128,11 +132,18 @@ a{
 .navbar-nav{
     flex-direction: row;
     padding-bottom: 0;
+    gap: 2vw;
+}
+.navbar{
+    flex-wrap: nowrap;
+    height: 5vw;
+    padding: 0.55vw 0;
 }
 .r_l_1{
     display: flex;
     flex-direction: column;
     gap: 3vw;
+    padding-top: 3vw;
 }
 .r_l_1_s{
     display: flex;
@@ -141,6 +152,7 @@ a{
 .user{
     font-size: 1.95vw;
     color: #7abaff;
+    margin: 0;
 }
 .person{
     display: flex;

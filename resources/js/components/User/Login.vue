@@ -2,25 +2,22 @@
     <div class="flex_main">
         <div class="login-box">
             <h1 class="title">Login</h1>
-            <form>
+            <form class="form_log">
                 <div class="user-box">
                     <input type="email"
                     v-model="email"
                     required=""
                            placeholder="email"
                     >
-                    <label>Email</label>
-                </div>
-                <div v-if="error" class="text-danger mb-3">
-                    {{this.error}}
-                </div>
-                <div class="user-box">
+
                     <input type="password"
                     v-model="password"
                     required=""
                            placeholder="password"
                     >
-                    <label>Password</label>
+                </div>
+                <div v-if="error" class="text-danger mb-3">
+                {{this.error}}
                 </div>
                 <a href="#" @click.prevent="login">
                     <span></span>
@@ -79,8 +76,9 @@ export default {
     text-transform: uppercase;
     letter-spacing: 3px;
     font-size: 3.5vw;
-    line-height: 3.125vw;
-    padding-bottom: 3.125vw;
+    margin: 0;
+    line-height: 3vw;
+    padding-bottom: 3vw;
     color: #00dbde;
     background: #00dbde;
     background: linear-gradient(to right,#00dbde  0%,#fc00ff  100%) !important;
@@ -125,27 +123,6 @@ export default {
     outline: none;
     background: transparent;
 }
-.login-box .user-box label {
-    position: absolute;
-    top:0;
-    left: 0;
-    padding: 0.65vw 0;
-    font-size: 1.04vw;
-    color: #fff;
-    display: none;
-    pointer-events: none;
-    transition: .5s;
-}
-
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
-    position: absolute;
-    top: -1.82vw ;
-    left: 0;
-    display: block;
-    color: #03e9f4;
-    font-size: 0.8vw;
-}
 
 .login-box form a {
     position: relative;
@@ -158,7 +135,6 @@ export default {
     overflow: hidden;
     transition: .5s;
     margin-top: 2.6vw;
-    letter-spacing: 4px
 }
 
 .login-box a:hover {
@@ -250,32 +226,32 @@ export default {
         bottom: 100%;
     }
 }
-@media screen and (max-width: 600px){
-    .login-box .user-box input:focus ~ label,
-    .login-box .user-box input:valid ~ label {
-        top: -5px;
-        left: 0;
-    }
-    .title{
-        padding-bottom: 5px;
-        margin-bottom: 0;
-    }
-}
-@media screen and (max-width: 425px){
-    .login-box .user-box input:focus ~ label,
-    .login-box .user-box input:valid ~ label {
-        top: 2px;
-        left: 0;
-    }
-    .title{
-        margin-bottom: 0;
-    }
-}
-@media screen and (max-width: 250px){
-    .login-box .user-box input:focus ~ label,
-    .login-box .user-box input:valid ~ label {
-        top: 5px;
-        left: 0;
-    }
-}
+//@media screen and (max-width: 600px){
+//    .login-box .user-box input:focus ~ label,
+//    .login-box .user-box input:valid ~ label {
+//        top: -5px;
+//        left: 0;
+//    }
+//    .title{
+//        padding-bottom: 5px;
+//        margin-bottom: 0;
+//    }
+//}
+//@media screen and (max-width: 425px){
+//    .login-box .user-box input:focus ~ label,
+//    .login-box .user-box input:valid ~ label {
+//        top: 2px;
+//        left: 0;
+//    }
+//    .title{
+//        margin-bottom: 0;
+//    }
+//}
+//@media screen and (max-width: 250px){
+//    .login-box .user-box input:focus ~ label,
+//    .login-box .user-box input:valid ~ label {
+//        top: 5px;
+//        left: 0;
+//    }
+//}
 </style>

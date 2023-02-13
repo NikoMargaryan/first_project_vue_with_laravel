@@ -30,11 +30,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('refresh', 'refresh');
 
     Route::group(['middleware' => 'jwt.auth'], function (){
-
         Route::group(['namespaces' => 'User','prefix' => 'users'],function () {
             Route::get('/',[UserController::class,'user_list']);
-            Route::get('/name',[GetUserController::class,'userName']);
-            Route::get('/image',[GetImageController::class,'userImage']);
         });
 
     });
@@ -43,6 +40,8 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::group(['namespaces' => 'User','prefix' => 'users'],function () {
     Route::post('/',[StoreController::class,'store']);
+    Route::get('/name',[GetUserController::class,'userName']);
+    Route::get('/image',[GetImageController::class,'userImage']);
 });
 
 

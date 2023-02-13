@@ -2,34 +2,34 @@
     <div class="flex_main_reg">
         <div class="login-box_reg">
             <h1 class="title_reg">Registration</h1>
-            <form>
                 <div class="user-box_reg">
                     <input type="text"
                            v-model="name"
                            required=""
+                           id="form"
+                           placeholder="name"
                     >
-                    <label>Name</label>
                 </div>
                 <div class="user-box_reg">
                     <input type="email"
                            v-model="email"
                            required=""
+                           placeholder="email"
                     >
-                    <label>Email</label>
                 </div>
                 <div class="user-box_reg">
                     <input type="password"
                            v-model="password"
                            required=""
+                           placeholder="password"
                     >
-                    <label>Password</label>
                 </div>
                 <div class="user-box_reg">
                     <input type="password"
                            v-model="password_confirmation"
                            required=""
+                           placeholder="password_confirmation"
                     >
-                    <label>Password Confirmation</label>
                 </div>
                 <div class="reg">
                     <input type="file"
@@ -44,14 +44,15 @@
                 <div v-if="error" class="text-danger mb-3">
                     {{this.error}}
                 </div>
-                <a href="#" @click.prevent="store">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    Send
-                </a>
-            </form>
+                <div class="button_send">
+                    <a href="#" @click.prevent="store">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        Send
+                    </a>
+                </div>
         </div>
     </div>
 </template>
@@ -102,6 +103,7 @@ export default {
         border-radius: 0.3vw;
         cursor: pointer;
         margin-top: 1vw;
+        font-size: 1.04vw;
     }
 }
 .text-danger{
@@ -112,8 +114,9 @@ export default {
     text-transform: uppercase;
     letter-spacing: 0.2vw;
     font-size: 2.5vw;
-    line-height: 3.125vw;
-    padding-bottom: 3.125vw;
+    margin: 0;
+    line-height: 3vw;
+    padding-bottom: 3vw;
     color: #00dbde;
     background: #00dbde;
     background: linear-gradient(to right,#00dbde  0%,#fc00ff  100%) !important;
@@ -128,6 +131,7 @@ export default {
     top: 18vw;
     left: 46.8vw;
     width: 26vw;
+    height: 37vw;
     padding: 2.6vw;
     transform: translate(-50%, -50%);
     background: rgba(0,0,0,.7);
@@ -145,6 +149,7 @@ export default {
 
 .login-box_reg .user-box_reg {
     position: relative;
+    height: 4vw;
 }
 
 .login-box_reg .user-box_reg input {
@@ -156,28 +161,11 @@ export default {
     border: none;
     border-bottom: 1px solid #fff;
     outline: none;
+    height: 2vw;
     background: transparent;
 }
-.login-box_reg .user-box_reg label {
-    position: absolute;
-    top:0;
-    left: 0;
-    padding: 0.65vw 0;
-    font-size: 1.04vw;
-    color: #fff;
-    pointer-events: none;
-    transition: .5s;
-}
 
-.login-box_reg .user-box_reg input:focus ~ label,
-.login-box_reg .user-box_reg input:valid ~ label {
-    top: -1.82vw;
-    left: 0;
-    color: #03e9f4;
-    font-size: 0.8vw;
-}
-
-.login-box_reg form a {
+.button_send a {
     position: relative;
     display: inline-block;
     padding: 0.65vw 1.3vw;
@@ -191,7 +179,7 @@ export default {
     letter-spacing: 4px
 }
 
-.login-box_reg a:hover {
+.button_send a:hover {
     background: #03e9f4;
     color: #fff;
     border-radius: 0.33vw;
@@ -201,12 +189,12 @@ export default {
     0 0 6.5vw #03e9f4;
 }
 
-.login-box_reg a span {
+.button_send a span {
     position: absolute;
     display: block;
 }
 
-.login-box_reg a span:nth-child(1) {
+.button_send a span:nth-child(1) {
     top: 0;
     left: -100%;
     width: 100%;
@@ -224,7 +212,7 @@ export default {
     }
 }
 
-.login-box_reg a span:nth-child(2) {
+.button_send a span:nth-child(2) {
     top: -100%;
     right: 0;
     width: 0.13vw;
@@ -243,7 +231,7 @@ export default {
     }
 }
 
-.login-box_reg a span:nth-child(3) {
+.button_send a span:nth-child(3) {
     bottom: 0;
     right: -100%;
     width: 100%;
@@ -262,7 +250,7 @@ export default {
     }
 }
 
-.login-box_reg a span:nth-child(4) {
+.button_send a span:nth-child(4) {
     bottom: -100%;
     left: 0;
     width: 0.13vw;
@@ -278,52 +266,6 @@ export default {
     }
     50%,100% {
         bottom: 100%;
-    }
-}
-
-//@media screen and (max-width: 1024px){
-//    .title_reg{
-//        font-size: 20px;
-//        letter-spacing: 0;
-//    }
-//}
-//@media screen and (max-width: 685px){
-//    .title_reg{
-//        font-size: 15px;
-//    }
-//}
-@media screen and (max-width: 600px){
-    .login-box_reg .user-box_reg input:focus ~ label,
-    .login-box_reg .user-box_reg input:valid ~ label {
-        top: -5px;
-        left: 0;
-    }
-    .title_reg{
-        padding-bottom: 5px;
-        margin-bottom: 0;
-    }
-}
-@media screen and (max-width: 425px){
-    .login-box_reg .user-box_reg input:focus ~ label,
-    .login-box_reg .user-box_reg input:valid ~ label {
-        top: 2px;
-        left: 0;
-    }
-    .title_reg{
-        margin-bottom: 0;
-    }
-}
-@media screen and (max-width: 270px){
-    .login-box_reg {
-        position: absolute;
-        top: 50px;
-    }
-}
-@media screen and (max-width: 250px){
-    .login-box_reg .user-box_reg input:focus ~ label,
-    .login-box_reg .user-box_reg input:valid ~ label {
-        top: 5px;
-        left: 0;
     }
 }
 </style>

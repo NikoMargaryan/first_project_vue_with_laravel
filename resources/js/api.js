@@ -25,7 +25,6 @@ api.interceptors.response.use({},
                 'Authorization': `Bearer ${localStorage.getItem('authorisation_token')}`
             }
         }).then(res => {
-            console.log(res)
             localStorage.setItem('authorisation_token',res.data.authorisation.token)
 
             error.config.headers['Authorization'] = `Bearer ${res.data.authorisation.token}`
